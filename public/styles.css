@@ -9,3 +9,8 @@
   border-radius: 8px;
   display: block;
 }
+
+.content {
+  height: 200px;
+  padding: 20px;
+}

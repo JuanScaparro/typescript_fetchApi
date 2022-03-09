@@ -38,7 +38,7 @@ function setRandom() {
   }
   console.log( 'actualPostIndex -> ',actualPostIndex );
   console.log( 'range -> ',range );
-}
+};
 
 function buildPost(post: IPost) {
   postElement.innerHTML = '';
@@ -55,18 +55,22 @@ function goPrev() {
   if( actualPostIndex > range ){
     actualPostIndex -= range;
     buildPost( posts[actualPostIndex] );
+    btnNext.style.display = 'inline';
   }else{
     window.alert( 'Has llegado al PRIMER elemento' );
-  }
-}
+    btnPrev.style.display = 'none';
+  };
+};
 
 function goNext() {
   if( actualPostIndex < posts.length-range ) {
     actualPostIndex += range;
     buildPost( posts[actualPostIndex] );
+    btnPrev.style.display = 'inline';
   }else{
     window.alert( 'Has llegado al ULTIMO elemento' );
-  }
+    btnNext.style.display = 'none';
+  };
 };
 
 function init() {
