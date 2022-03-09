@@ -16,6 +16,8 @@ import { IPost } from "./interfaces/ipost.interface.js";
 // .catch( e => console.log(e))
 
 let isPostsVisible: boolean = false;
+const searchText: string = 'libero';
+//
 let posts: IPost[] = [];
 const postElement: HTMLElement = <HTMLElement>document.getElementById( 'posts' );  
 const btnShow: HTMLButtonElement = <HTMLButtonElement>document.getElementById( 'btnShowPost' );
@@ -43,16 +45,23 @@ function loadData() {
 function saveData( data: IPost[] ) {
   posts = data;
 };
-  
+
+function buildPost( post: IPost ) {
+  const template: string = `<div class="post col-8 mx-auto text-center">
+        <h6>${post.id} ${ post.title.toUpperCase() }</h6>
+        <p>${ post.body }</p>
+      </div>`
+      const div = document.createElement( 'div' );
+      div.innerHTML = template;
+      postElement.appendChild( div );
+};
+
 function showData() {
-  posts.forEach( el => {
-    const template: string = `<div class="post col-8 mx-auto text-center">
-      <h6>${ el.title.toUpperCase() }</h6>
-      <p>${ el.body }</p>
-    </div>`
-    const div = document.createElement( 'div' );
-    div.innerHTML = template;
-    postElement.appendChild( div );
+    posts.forEach( elem => { 
+    const isTrue: boolean = elem.body.includes( searchText );
+      if( isTrue ){
+        buildPost( elem );
+      }
   });
 };
 

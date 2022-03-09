@@ -13,6 +13,8 @@
 // .then( respuesta => console.log( respuesta))
 // .catch( e => console.log(e))
 let isPostsVisible = false;
+const searchText = 'libero';
+//
 let posts = [];
 const postElement = document.getElementById('posts');
 const btnShow = document.getElementById('btnShowPost');
@@ -41,15 +43,22 @@ function saveData(data) {
     posts = data;
 }
 ;
+function buildPost(post) {
+    const template = `<div class="post col-8 mx-auto text-center">
+        <h6>${post.id} ${post.title.toUpperCase()}</h6>
+        <p>${post.body}</p>
+      </div>`;
+    const div = document.createElement('div');
+    div.innerHTML = template;
+    postElement.appendChild(div);
+}
+;
 function showData() {
-    posts.forEach(el => {
-        const template = `<div class="post col-8 mx-auto text-center">
-      <h6>${el.title.toUpperCase()}</h6>
-      <p>${el.body}</p>
-    </div>`;
-        const div = document.createElement('div');
-        div.innerHTML = template;
-        postElement.appendChild(div);
+    posts.forEach(elem => {
+        const isTrue = elem.body.includes(searchText);
+        if (isTrue) {
+            buildPost(elem);
+        }
     });
 }
 ;
